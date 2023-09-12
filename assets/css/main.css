@@ -1,0 +1,86 @@
+:root {
+    --text-primary: #fbf1c7;
+    --bg-primary: #3c3836;
+    --bg-link-hover: #fbf1c7;
+    --text-link-hover: #689d6a;
+    --text-secondary: #d79921;
+}
+
+.splash-text {
+    font-family: CommitMono;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 3em;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.splash-text .highlight {
+    color: var(--text-secondary)
+}
+
+body {
+    font-family: CommitMono;
+    font-size: 16px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content.wrap {
+    flex: 1;
+}
+
+footer {
+    text-align: center;
+    margin-top: 100px;
+    padding: 20px 0;
+    
+}
+
+footer .footer-link-text {
+    font-family: CommitMono;
+    color: var(--text-primary);
+    transition: color 0.3s;
+    font-style: normal;
+    text-decoration: none;
+}
+
+footer .footer-link-text:hover {
+    color: var(--text-link-hover)
+}
+
+.icon-hyperlinks-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.icon-hyperlinks-list .icon {
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    line-height: 75px;
+    text-align: center;
+    border: 1px solid;
+    font-size: 2.5em;
+    margin-top: 10px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+    transition: background-color 0.3s, color 0.3s;
+
+}
+
+.icon-hyperlinks-list .icon:hover {
+    background-color: var(--bg-link-hover);
+    color: var(--text-link-hover);
+}
