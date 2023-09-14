@@ -1,0 +1,1 @@
+gallery placeholder - without a placeholder, the content in this box isn't wide enough, making it look a bit silly. so here we go to avoid weird looking screen transitions!
