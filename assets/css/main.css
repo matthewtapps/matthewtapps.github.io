@@ -93,7 +93,6 @@ body.loaded .triangle {
 .index-content-box {
     flex-direction: column;
     min-height: 0px;
-    min-width: 400px;
     max-width: 900px;
     height:auto;
     border: 1px solid;
