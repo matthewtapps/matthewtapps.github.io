@@ -12,6 +12,12 @@
     font-style: normal
 }
 
+@font-face {
+    font-family: 'CommitMono';
+    src: url('https://matthewtapps.github.io/assets/fonts/CommitMono-200-Regular.otf') format ('opentype');
+    font-weight: 200;
+    font-style: normal
+}
 
 @font-face {
     font-family: 'CommitMono';
@@ -38,5 +44,12 @@
     font-family: 'CommitMono';
     src: url('https://matthewtapps.github.io/assets/fonts/CommitMono-Light-Italic.otf') format ('opentype');
     font-weight: 300;
+    font-style: italic
+}
+
+@font-face {
+    font-family: 'CommitMono';
+    src: url('https://matthewtapps.github.io/assets/fonts/CommitMono-200-Italic.otf') format ('opentype');
+    font-weight: 200;
     font-style: italic
 }
