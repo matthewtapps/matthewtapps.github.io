@@ -8,7 +8,7 @@
 
 body {
     font-family: CommitMono;
-    font-weight: 300;
+    font-weight: 200;
     font-size: 16px;
     background-color: var(--bg-primary);
     color: var(--text-primary);
@@ -30,7 +30,7 @@ body {
 
 .splash-text {
     font-family: CommitMono;
-    font-weight: 300;
+    font-weight: 200;
     font-style: normal;
     font-size: 3em;
     margin: 10px;
@@ -106,7 +106,7 @@ body.loaded .triangle {
 
 .index-content-box .content {
     margin: 10px;
-    font-weight: 400;
+    font-weight: 200;
     border: none;
     white-space: pre-wrap;
 }
@@ -119,8 +119,7 @@ footer {
     text-align: center;
     margin-top: 10px;
     padding: 20px 0;
-    font-weight: 300;
-    
+    font-weight: 200;
 }
 
 footer .footer-link-text {
