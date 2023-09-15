@@ -1,6 +1,6 @@
 I've always been interested in coding, however I officially started my coding journey at the start of April, 2023, when after some brief exposure to M Language in Power BI I asked myself - why don't I just go and learn a programming language?
 
-I spent the next month or so smashing out 75% of the book <div class="index-content-box content italic">Learn To Code By Solving Problems: A Python Programming Primer</div>, by Daniel Zingaro. I got absolutely hooked on solving the competition coding problems in this book, finding coding to be extremely engaging as it actives that problem solving area in my brain so well.
+I spent the next month or so smashing out 75% of the book Learn To Code By Solving Problems: A Python Programming Primer, by Daniel Zingaro. I got absolutely hooked on solving the competition coding problems in this book, finding coding to be extremely engaging as it actives that problem solving area in my brain so well.
 
 After the aforementioned 75% of the textbook, I eventually ran out of steam with coding problems and decided to tackle a project I had in mind - creating a scorekeeping and timing app for Brazilian Jiu Jitsu matches (an idea I had while helping to run an in-house competition). After a lot of learning I had a functioning Windows application with a Tkinter ui, written entirely in Python.
 
