@@ -1,55 +1,7 @@
 @font-face {
-    font-family: 'CommitMono';
-    src: url('./assets/fonts/CommitMono-200-Italic.otf') format ('opentype');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'CommitMono';
-    src: url('./assets/fonts/CommitMono-700-Regular.otf') format ('opentype');
-    font-weight: 700;
-    font-style: normal
-}
-
-@font-face {
-    font-family: 'CommitMono';
-    src: url('./assets/fonts/CommitMono-200-Regular.otf') format ('opentype');
-    font-weight: 200;
-    font-style: normal
-}
-
-@font-face {
-    font-family: 'CommitMono';
-    src: url('./assets/fonts/CommitMono-300-Regular.otf') format ('opentype');
-    font-weight: 300;
-    font-style: normal
-}
-
-@font-face {
-    font-family: 'CommitMono';
-    src: url('./assets/fonts/CommitMono-400-Italic.otf') format ('opentype');
-    font-weight: 400;
-    font-style: italic
-}
-
-@font-face {
-    font-family: 'CommitMono';
-    src: url('./assets/fonts/CommitMono-700-Italic.otf') format ('opentype');
-    font-weight: 700;
-    font-style: italic
-}
-
-@font-face {
-    font-family: 'CommitMono';
-    src: url('./assets/fonts/CommitMono-300-Italic.otf') format ('opentype');
-    font-weight: 300;
-    font-style: italic
-}
-
-@font-face {
-    font-family: 'CommitMono';
-    src: url('./assets/fonts/CommitMono-200-Italic.otf') format ('opentype');
-    font-weight: 200;
-    font-style: italic
-}
+    font-family: "CommitMono";
+    src: url("/../assets/fonts/CommitMono VariableFont.woff2") format("woff2-variations");
+    font-weight: 200 700;
+    font-stretch: 75% 125%;
+    font-style: oblique 0deg 20deg;
+  }

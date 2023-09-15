@@ -107,6 +107,7 @@ body.loaded .triangle {
 .index-content-box .content {
     margin: 10px;
     font-weight: 200;
+    font-family: CommitMono;
     border: none;
     white-space: pre-wrap;
 }
