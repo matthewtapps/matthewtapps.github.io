@@ -110,6 +110,7 @@ body.loaded .triangle {
     font-family: CommitMono;
     border: none;
     white-space: pre-wrap;
+    font-size: clamp(0.625rem, 1rem, 2rem);
 }
 
 .index-content-box .content .italic {

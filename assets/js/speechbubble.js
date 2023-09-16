@@ -7,17 +7,19 @@ document.addEventListener("DOMContentLoaded", async function() {
     activeItem = navItems[0];
     document.body.classList.add('loaded');
 
-    positionTriangleUnder(activeItem);
     await loadContent(activeItem.innerText.toLowerCase());
+    positionTriangleUnder(activeItem);
     openBubble();
 
     navItems.forEach(item => {
         item.addEventListener("click", async function() {
-            activeItem = item;
-            await closeBubble();
-            await loadContent(item.innerText.toLowerCase());
-            await positionTriangleUnder(item);
-            openBubble();
+            if (activeItem != item) {
+                activeItem = item;
+                await closeBubble();
+                await loadContent(item.innerText.toLowerCase());
+                await positionTriangleUnder(item);
+                openBubble();
+            }
         });
     });
 });
