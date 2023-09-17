@@ -32,9 +32,9 @@ body {
     font-family: CommitMono;
     font-weight: 200;
     font-style: normal;
-    font-size: 3em;
+    font-size: clamp(0.8em, 3em, 5em);
     padding: 30px;
-    width: fit-content;
+    align-self: center;
 }
 
 .splash-text .highlight {
@@ -43,7 +43,7 @@ body {
 
 .navigation-list {
     list-style-type: none;
-    font-size: clamp(0.5em, 1.3em, 2em);
+    font-size: clamp(0.3em, 1.3em, 2em);
     padding-bottom: 25px;
     position: relative;
     display: flex;
@@ -52,11 +52,11 @@ body {
 
 .navigation-list .item {
     display: inline-block;
+    text-align: center;
+    padding-right: 10px;
     color: var(--text-primary);
     transition: color 0.3s;
     text-decoration: none;
-    padding-left: 10px;
-    padding-right: 10px;
 }
 
 .navigation-list .item:hover {
@@ -67,14 +67,15 @@ body {
     display: inline-block;
     text-align: center;
     color: var(--text-primary);
+    padding-right: 10px;
 }
 
 .triangle {
     position: absolute;
     width: 40px;
     height: 40px;
+    bottom: -11px;
     background-image: url('../svg/triangle.svg');
-    bottom: -1px;
 }
 
 body.loaded .triangle {
@@ -88,8 +89,7 @@ body.loaded .triangle {
     height:auto;
     border: 1px solid;
     border-color: var(--text-primary);
-    margin: 30px;
-    margin-top: 0px;
+    margin: 10px;
     width: fit-content;
     align-self: center;
     overflow: hidden;
