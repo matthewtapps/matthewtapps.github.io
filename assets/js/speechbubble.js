@@ -1,6 +1,7 @@
 "use strict";
 
-let activeItem
+let activeItem;
+let contentItemMap = {};
 
 document.addEventListener("DOMContentLoaded", async function() {
     let navItems = document.querySelectorAll(".navigation-list .item");
@@ -16,7 +17,11 @@ document.addEventListener("DOMContentLoaded", async function() {
             if (activeItem != item) {
                 activeItem = item;
                 await closeBubble();
-                await loadContent(item.innerText.toLowerCase());
+                if(!contentItemMap[item.innerText.toLowerCase()]){
+                    await loadContent(item.innerText.toLowerCase());
+                } else {
+                    displayContent(item.innerText.toLowerCase());
+                }
                 await positionTriangleUnder(item);
                 openBubble();
             }
@@ -35,10 +40,9 @@ function positionTriangleUnder(item) {
         let triangle = document.querySelector(".triangle");
         let itemPos = item.getBoundingClientRect();
         let trianglePos = triangle.getBoundingClientRect();
-        let newPosition = itemPos.left + (itemPos.width / 2) - (trianglePos.width / 2);
+        let newLeftPosition = itemPos.left + (itemPos.width / 2) - (trianglePos.width / 2);
 
-        triangle.style.left = newPosition + "px";
-        triangle.style.transform = 'none';
+        triangle.style.left = newLeftPosition + "px";
         
         triangle.addEventListener('transitionend', function onEnd() {
             triangle.removeEventListener('transitionend', onEnd);
@@ -48,11 +52,14 @@ function positionTriangleUnder(item) {
 }
 
 async function loadContent(id) {
+    let activeDiv = document.querySelector(`.index-content-box #${id}`);
+    
     return fetch(`./assets/content/${id}.html`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Failed to load content for ${id}. Status: ${response.status}`);
             }
+            contentItemMap[id] = true;
             return response.text();
         })
         .then(content => {
@@ -61,13 +68,23 @@ async function loadContent(id) {
                 div.classList.add('hidden');
             });
 
-            let activeDiv = document.querySelector(`.index-content-box #${id}`);
             activeDiv.innerHTML = content;
             activeDiv.classList.remove('hidden');
         })
         .catch(error => {
             console.error('Error in loadContent:', error);
         });
+    }
+
+function displayContent(id) {
+    let contentDivs = document.querySelectorAll('.index-content-box .content');
+    contentDivs.forEach(div => {
+        if (div.id === id) {
+            div.classList.remove('hidden');
+        } else {
+            div.classList.add('hidden');
+        }
+    });
 }
 
 function openBubble() {
