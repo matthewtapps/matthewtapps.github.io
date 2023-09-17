@@ -32,7 +32,7 @@ body {
     font-family: CommitMono;
     font-weight: 200;
     font-style: normal;
-    font-size: clamp(0.8em, 3em, 5em);
+    font-size: clamp(0.2em, 4em, 8em);
     padding: 30px;
     align-self: center;
 }
@@ -43,7 +43,7 @@ body {
 
 .navigation-list {
     list-style-type: none;
-    font-size: clamp(0.3em, 1.3em, 2em);
+    font-size: clamp(1vw, 6vw, 1.5em);
     padding-bottom: 25px;
     position: relative;
     display: flex;
