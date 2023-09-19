@@ -36,6 +36,10 @@ body {
     color: var(--text-primary);
 }
 
+.hidden {
+    display: none;
+}
+
 .page-container {
     display: flex;
     flex-direction: column;
@@ -130,31 +134,6 @@ body.loaded .triangle {
     font-style: italic;
 }
 
-footer {
-    text-align: center;
-    margin-top: 10px;
-    padding: 20px 0;
-    font-weight: 200;
-    font-size: clamp(0.5em, 1.2vw, 1.5em);
-}
-
-footer .footer-link-text {
-    font-family: CommitMono;
-    color: var(--text-primary);
-    transition: color 0.3s;
-    font-style: normal;
-    text-decoration: none;
-    font-size: clamp(0.5em, 1.2vw, 1.5em);
-}
-
-footer .footer-link-text:hover {
-    color: var(--text-link-hover)
-}
-
-.hidden {
-    display: none;
-}
-
 .gallery {
     margin: 0px;
     padding: 0px;
@@ -203,4 +182,25 @@ footer .footer-link-text:hover {
 
 .gallery .spacer {
     height: 10px
+}
+
+footer {
+    text-align: center;
+    margin-top: 10px;
+    padding: 20px 0;
+    font-weight: 200;
+    font-size: clamp(0.5em, 1.6vw, 1.5em);
+}
+
+footer .footer-link-text {
+    font-family: CommitMono;
+    color: var(--text-primary);
+    transition: color 0.3s;
+    font-style: normal;
+    text-decoration: none;
+    font-size: clamp(0.5em, 1.6vw, 1.5em);
+}
+
+footer .footer-link-text:hover {
+    color: var(--text-link-hover)
 }
