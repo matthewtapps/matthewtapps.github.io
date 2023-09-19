@@ -54,7 +54,7 @@ function positionTriangleUnder(item) {
 async function loadContent(id) {
     let activeDiv = document.querySelector(`.index-content-box #${id}`);
     
-    return fetch(`./assets/content/${id}.html`)
+    return fetch(`./assets/written_content/${id}.html`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Failed to load content for ${id}. Status: ${response.status}`);

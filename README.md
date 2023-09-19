@@ -3,3 +3,7 @@ Learning HTML/CSS/Javascript by building my own website, also allowing me to cus
 TODO: 
 
 Gallery links & endpoints.
+
+Privacy policy.
+
+Contact page/box.
