@@ -54,7 +54,7 @@ function positionTriangleUnder(item) {
 async function loadContent(id) {
     let activeDiv = document.querySelector(`.index-content-box #${id}`);
     
-    return fetch(`./assets/written_content/${id}.html`)
+    return fetch(`./assets/contentbox/${id}.html`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Failed to load content for ${id}. Status: ${response.status}`);
@@ -63,12 +63,13 @@ async function loadContent(id) {
             return response.text();
         })
         .then(content => {
+            let cleanedContent = content.replace(/>\s+</g, '><');
             let contentDivs = document.querySelectorAll('.index-content-box .content');
             contentDivs.forEach(div => {
                 div.classList.add('hidden');
             });
 
-            activeDiv.innerHTML = content;
+            activeDiv.innerHTML = cleanedContent;
             activeDiv.classList.remove('hidden');
         })
         .catch(error => {
