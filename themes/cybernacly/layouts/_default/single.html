@@ -1,0 +1,32 @@
+{{ define "main" }}
+<div class="centered post">
+    <h1>{{ .Title }}</h1>
+
+    <ul>
+        <li>
+            <time datetime="{{ .PublishDate }}">{{ .PublishDate.Format "Jan 2, 2006" }}</time>
+        </li>
+        <li>
+            <span>{{ .WordCount }} Words</span>
+        </li>
+        <li>
+            <span>{{ .ReadingTime }} Minute read</span>
+        </li>
+    </ul>
+
+    {{ with .TableOfContents }}
+    <h3>Table of Contents</h3>
+    <div>
+        {{ . }}
+    </div>
+    {{ end }}
+
+    {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+
+    <hr>
+
+    <div class="content">
+    {{ .Content }}
+    </div>
+</div>
+{{ end }}
