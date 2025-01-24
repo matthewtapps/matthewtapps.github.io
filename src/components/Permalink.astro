@@ -57,14 +57,14 @@ const { linkaddress } = Astro.props;
             console.log("Copied to clipboard:", linkaddress);
 
             // Toggle success icon
-            document.getElementById("default-icon").classList.add("hidden");
-            document.getElementById("success-icon").classList.remove("hidden");
+            document.getElementById("default-icon")?.classList.add("hidden");
+            document.getElementById("success-icon")?.classList.remove("hidden");
 
             setTimeout(() => {
               document
                 .getElementById("default-icon")
-                .classList.remove("hidden");
-              document.getElementById("success-icon").classList.add("hidden");
+                ?.classList.remove("hidden");
+              document.getElementById("success-icon")?.classList.add("hidden");
             }, 2000); // Reset icon after 2 seconds
           })
           .catch((err) => console.error("Failed to copy:", err));
