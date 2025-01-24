@@ -14,6 +14,8 @@ The key areas of technology that I see causing harm to society are:
 - Gambling
 - Unrestrained AI development
 
-This blog is for me to ramble about the above, and whatever else I find interesting while I'm at it.
+Being frank, this stuff stresses me out quite a lot - in particular with social media, it feels like a bit of a self-defeating problem: I think if everyone could see the effects that unregulated social media is having on society, that it would be easy to collectively agree that it needs to change, but getting to the point where everyone can see the effects seems impossible without having some kind of reform in the first place.
+
+This blog is for me to ramble about the above, and whatever else I find interesting while I'm at it - it is baby steps towards affecting change for the above topics.
 
 Thanks for coming.
