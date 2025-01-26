@@ -46,7 +46,7 @@ Having said the above, I think a better starting place to think about is _what d
 It's hard to have good-faith conversations about anything when you don't have a clear picture of what someone who disagrees with you actually believes.
 ### Less reliance on the platform. 
 
-This is directly at odds with the current incentive structure behind social media - I shouldn't be compelled to use the platform more by using it at all, or in other words the platform shouldn't be physiologically addicting. 
+This is directly at odds with the current incentive structure behind social media - I shouldn't be compelled to use the platform more by using it at all, or in other words the platform shouldn't be psychologically addicting. 
 At the very least, I should be making a conscious decision about whether or not I use the platform, and how much time I spend on the platform.
 ### Stronger connections with other human beings.
 
