@@ -33,15 +33,21 @@ My understanding of **"The Algorithm"** that we have all grown to hate is that i
 
 ## An Alternative?
 I've been playing with ideas of what modern social media technologies would look like if they operated under different incentive structures. I think it's easier to start at the incentive point, e.g. what do we actually want to incentivize as an effect of our social media recommendation algorithms? My answers to that are ideally:
-- Accurate perception of others' beliefs. 
+### Accurate perception of others' beliefs. 
 
 It's hard to have good-faith conversations about anything when you don't have a clear picture of what someone who disagrees with you actually believes.
-- Less reliance on the platform. 
+### Less reliance on the platform. 
 
 This is directly at odds with the current incentive structure behind social media - I shouldn't be compelled to use the platform more by using it at all, or in other words the platform shouldn't be physiologically addicting. 
 At the very least, I should be making a conscious decision about whether or not I use the platform, and how much time I spend on the platform.
-- Stronger connections with other human beings.
+### Stronger connections with other human beings.
 
 We are more connected than ever before thanks to modern technology, and that is absolutely incredible. So why do we often feel isolated and alone after using social media platforms?
 
-There's got to be a better way than what we've got now.
+A few alternative ownership structures that might apply are:
+- Not For Profits, which are established with a specific purpose and always reinvest their profits towards this purpose
+- B-Corps or other alternative company structures, which enshrine within their binding constitution that the company must not _only_ operate in the interest of profit
+- Cooperatives, which are organisations that are owned and democratically governed by its members - one member, one vote (though these still sometimes implement hierarchical management). Influence of the organisation's incentives are limited to the actual workers of the organisation in a cooperative, but this may still be a profit incentive.
+- Collectives, which are similar to cooperatives except that the management structure is by definition flat, with every member of the collective automatically being an equal director of the organisation.
+
+Out of these, I am currently most partial to a Not For Profit organisation to align with the preferred incentives laid out about. In any case, there's got to be a better way than what we've got now.
