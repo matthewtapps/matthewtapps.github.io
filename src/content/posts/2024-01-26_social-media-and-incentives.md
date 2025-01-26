@@ -32,7 +32,15 @@ My understanding of **"The Algorithm"** that we have all grown to hate is that i
 **The incentive used to train the algorithm is an extension of the incentive of the company through its ownership structure.** _Show me the incentives, and I'll show you the outcome_.
 
 ## An Alternative?
-I've been playing with ideas of what modern social media technologies would look like if they operated under different incentive structures. I think it's easier to start at the incentive point, e.g. what do we actually want to incentivize as an effect of our social media recommendation algorithms? My answers to that are ideally:
+I've been playing with ideas of what modern social media technologies would look like if they operated under different incentive structures. A few alternative ownership structures that might apply are:
+- **Not For Profits**, which are established with a specific purpose and always reinvest their profits towards this purpose
+- **B-Corps** or other alternative company structures, which enshrine within their binding constitution that the company must not _only_ operate in the interest of profit
+- **Cooperatives**, which are organisations that are owned and democratically governed by its members - one member, one vote (though these still sometimes implement hierarchical management). Influence of the organisation's incentives are limited to the actual workers of the organisation in a cooperative, but this may still be a profit incentive.
+- **Collectives**, which are similar to cooperatives except that the management structure is by definition flat, with every member of the collective automatically being an equal director of the organisation.
+
+Out of these, I am currently most partial to a Not For Profit organisation, mainly because it takes a hard-line stance against profit as an incentive for the organisation.
+
+Having said the above, I think a better starting place to think about is _what do we actually want to incentivise in a social media platform_? My answers to that are ideally:
 ### Accurate perception of others' beliefs. 
 
 It's hard to have good-faith conversations about anything when you don't have a clear picture of what someone who disagrees with you actually believes.
@@ -44,10 +52,4 @@ At the very least, I should be making a conscious decision about whether or not 
 
 We are more connected than ever before thanks to modern technology, and that is absolutely incredible. So why do we often feel isolated and alone after using social media platforms?
 
-A few alternative ownership structures that might apply are:
-- **Not For Profits**, which are established with a specific purpose and always reinvest their profits towards this purpose
-- **B-Corps** or other alternative company structures, which enshrine within their binding constitution that the company must not _only_ operate in the interest of profit
-- **Cooperatives**, which are organisations that are owned and democratically governed by its members - one member, one vote (though these still sometimes implement hierarchical management). Influence of the organisation's incentives are limited to the actual workers of the organisation in a cooperative, but this may still be a profit incentive.
-- **Collectives**, which are similar to cooperatives except that the management structure is by definition flat, with every member of the collective automatically being an equal director of the organisation.
-
-Out of these, I am currently most partial to a Not For Profit organisation to align with the preferred incentives laid out about. In any case, there's got to be a better way than what we've got now.
+Regardless of incentive structure, there's got to be a better way than what we've got now.
