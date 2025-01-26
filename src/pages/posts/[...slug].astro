@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
 import Permalink from "../../components/Permalink.astro";
+import { WORDS_PER_MINUTE } from "../../consts";
 import Layout from "../../layouts/Layout.astro";
 import { formatDate } from "../../lib/utils";
 
@@ -15,6 +16,10 @@ type Props = CollectionEntry<"posts">;
 
 const post = Astro.props;
 const { Content } = await post.render();
+const raw = post.body;
+const clean = raw.replace(/<\/?[^>]+(>|$)/g, "");
+const numberOfWords = clean.split(/\s/g).length;
+const amount = Math.ceil(numberOfWords / WORDS_PER_MINUTE);
 ---
 
 <Layout
@@ -29,6 +34,9 @@ const { Content } = await post.render();
     </h1>
     <p class="mb-1 font-medium text-zinc-500">
       {formatDate(post.data.date)}
+    </p>
+    <p class="mb-1 font-medium text-zinc-500">
+      {`${amount} minute read`}
     </p>
     <article>
       <Content />

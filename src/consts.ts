@@ -6,3 +6,4 @@ export const SITE_TITLE = "matthewtapps";
 export const SITE_DESCRIPTION = "Matt's Ramblings";
 
 export const EMAIL = "mail@matthewtapps.com";
+export const WORDS_PER_MINUTE = 200;
