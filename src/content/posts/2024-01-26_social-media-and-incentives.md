@@ -45,9 +45,9 @@ At the very least, I should be making a conscious decision about whether or not 
 We are more connected than ever before thanks to modern technology, and that is absolutely incredible. So why do we often feel isolated and alone after using social media platforms?
 
 A few alternative ownership structures that might apply are:
-- Not For Profits, which are established with a specific purpose and always reinvest their profits towards this purpose
-- B-Corps or other alternative company structures, which enshrine within their binding constitution that the company must not _only_ operate in the interest of profit
-- Cooperatives, which are organisations that are owned and democratically governed by its members - one member, one vote (though these still sometimes implement hierarchical management). Influence of the organisation's incentives are limited to the actual workers of the organisation in a cooperative, but this may still be a profit incentive.
-- Collectives, which are similar to cooperatives except that the management structure is by definition flat, with every member of the collective automatically being an equal director of the organisation.
+- **Not For Profits**, which are established with a specific purpose and always reinvest their profits towards this purpose
+- **B-Corps** or other alternative company structures, which enshrine within their binding constitution that the company must not _only_ operate in the interest of profit
+- **Cooperatives**, which are organisations that are owned and democratically governed by its members - one member, one vote (though these still sometimes implement hierarchical management). Influence of the organisation's incentives are limited to the actual workers of the organisation in a cooperative, but this may still be a profit incentive.
+- **Collectives**, which are similar to cooperatives except that the management structure is by definition flat, with every member of the collective automatically being an equal director of the organisation.
 
 Out of these, I am currently most partial to a Not For Profit organisation to align with the preferred incentives laid out about. In any case, there's got to be a better way than what we've got now.
