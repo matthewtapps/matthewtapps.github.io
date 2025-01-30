@@ -42,7 +42,7 @@ I've previously posted about [incentives that are an artifact of how social medi
 #### Criticisms of _Sapiens_
 In interest of confirming the veracity of my sources, I briefly looked into the critical response to _Sapiens_ and whether these ideas of shared belief are supported by the scientific community.
 
-The most compelling criticisms I have found about _Sapiens_ are about it's approach to the topics of history and anthropology, which is that of a pop science novel. The scope is massive (_"a brief history of humankind"_), and Harari generalizes a lot in the text.
+The most compelling criticisms I have found about _Sapiens_ are about it's approach to the topics of history and anthropology, which is that of a pop science novel. The scope is massive (_"a brief history of humankind"_), and Harari [generalizes a lot in the text](https://www.newenglishreview.org/articles/a-response-to-yuval-hararis-sapiens-a-brief-history-of-humankind/).
 
 The main idea I am extracting from _Sapiens_, though, is the concept of humankind's ability to hold shared beliefs (which is explained by Harari in the first chapters of the book), and that of the _cognitive revolution_ which is really what separates us from other animals on the planet.
 
