@@ -68,6 +68,30 @@ const {
     <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
     <ViewTransitions />
+    <script>
+      import { HoneycombWebSDK } from "@honeycombio/opentelemetry-web";
+      import { getWebAutoInstrumentations } from "@opentelemetry/auto-instrumentations-web";
+
+      const configDefaults = {
+        ignoreNetworkEvents: true,
+      };
+
+      const sdk = new HoneycombWebSDK({
+        debug: true,
+        apiKey: "SzCyvmoNSw9HgLXJDBNIoA",
+        serviceName: "matthewtapps.com",
+        instrumentations: [
+          getWebAutoInstrumentations({
+            "@opentelemetry/instrumentation-xml-http-request": configDefaults,
+            "@opentelemetry/instrumentation-document-load": configDefaults,
+            "@opentelemetry/instrumentation-user-interaction": {},
+            "@opentelemetry/instrumentation-fetch": configDefaults,
+          }),
+        ],
+      });
+
+      sdk.start();
+    </script>
   </head>
   <body
     class="font-sans text-zinc-900 antialiased transition-colors dark:bg-zinc-900 dark:text-zinc-200"
