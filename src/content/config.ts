@@ -6,7 +6,7 @@ const posts = defineCollection({
     isDraft: z.boolean().default(true),
     title: z.string(),
     description: z.string(),
-    date: z.coerce.date(),
+    publishDate: z.coerce.date(),
     image: z.string().default("/static/blog-placeholder.png"),
   }),
 });

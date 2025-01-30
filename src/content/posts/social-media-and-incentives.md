@@ -2,7 +2,7 @@
 isDraft: false
 title: "Social Media and Incentives"
 description: "Why the incentive structure behind modern social technologies is incompatible with society"
-date: "Jan 26 2025"
+publishDate: "Jan 26 2025"
 ---
 ## Incentives
 I spent the first few years of my career as a Chartered Accountant giving guidance to small business owners. One of the strongest levers we have to affect the behaviours others is to incentivize the behaviours we want, and increase the cost of the behaviours we don't. This isn't a novel idea, and it formed a large part of my advice as an accountant. I've since learned more about motivation in general, and these days I would give different advice to small business owners than I used to (for example, agency is one of the key ingredients to intrinsic motivation in individuals - people want to do things how they want to do them, they don't want to be told how to do them). However, at a larger scale, using incentives/costs as a lever is still a very compelling idea.

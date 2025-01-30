@@ -2,7 +2,7 @@
 isDraft: false
 title: "Shared Belief"
 description: "Shared belief is foundational to who we are as human beings, and social media is fracturing it"
-date: "Jan 27 2025"
+publishDate: "Jan 30 2025"
 ---
 I recently read the book [_Sapiens_](https://en.wikipedia.org/wiki/Sapiens:_A_Brief_History_of_Humankind) by Yuval Noah Harari. I found it quite enlightening, and think that some of the theories discussed frame the issues we are having with social media quite well. My interest in Harari's books was piqued after his guest attendance on the [Your Undivided Attention podcast](https://www.humanetech.com/podcast/28-two-million-years-in-two-hours-a-conversation-with-yuval-noah-harari), which is the biggest inspiration for my interest in social media and ethical technology.
 

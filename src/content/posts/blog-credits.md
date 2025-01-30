@@ -2,7 +2,7 @@
 isDraft: false
 title: "Blog Theme Credits"
 description: "Thanks to nicholsdly for the Astro blog template."
-date: "Jan 23 2025"
+publishDate: "Jan 23 2025"
 ---
 ## Blog Theme
 

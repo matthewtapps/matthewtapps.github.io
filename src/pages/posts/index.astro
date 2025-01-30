@@ -7,7 +7,7 @@ import { formatDate } from "../../lib/utils";
 const collection = await getCollection("posts");
 const posts = collection
   .filter((a) => !a.data.isDraft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
@@ -22,7 +22,7 @@ const posts = collection
             >
               <span class="group-hover:underline">{post.data.title}</span>
               <span class="text-nowrap text-zinc-500">
-                {formatDate(post.data.date)}
+                {formatDate(post.data.publishDate)}
               </span>
             </a>
           </li>

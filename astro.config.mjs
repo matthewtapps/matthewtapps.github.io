@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
+import { remarkModifiedTime } from "./src/services/remark-modified-time.mjs";
 
 import sitemap from "@astrojs/sitemap";
 
@@ -18,5 +19,6 @@ export default defineConfig({
         dark: "everforest-dark",
       },
     },
+    remarkPlugins: [remarkModifiedTime],
   },
 });

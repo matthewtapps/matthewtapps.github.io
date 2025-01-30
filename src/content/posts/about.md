@@ -2,7 +2,7 @@
 isDraft: false
 title: "About Matt"
 description: "Short bio and purpose of this blog"
-date: "Jan 24 2025"
+publishDate: "Jan 24 2025"
 ---
 ## Hi 👋
 I'm Matt, a consultant software engineer working for [Midnyte City](https://midnytecity.com.au) out of Melbourne, Australia.
