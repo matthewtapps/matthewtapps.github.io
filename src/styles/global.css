@@ -80,4 +80,16 @@
       @apply dark:bg-yellow-500/50 dark:text-white;
     }
   }
+
+  form {
+    input {
+      @apply my-4 font-medium border border-zinc-800 dark:border-zinc-700 dark:text-white dark:bg-zinc-800
+    }
+    textarea {
+      @apply my-4 font-medium border border-zinc-800 dark:border-zinc-700 dark:text-white dark:bg-zinc-800
+    }
+    button {
+      @apply rounded border px-2 py-1 font-medium text-black border-zinc-800 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white;
+    }
+  }
 }

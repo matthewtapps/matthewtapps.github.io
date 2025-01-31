@@ -1,0 +1,47 @@
+---
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "../consts";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title={SITE_TITLE}
+  description={SITE_DESCRIPTION}
+  className="flex h-svh flex-col"
+>
+  <main class="space-y-4">
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <input
+        type="hidden"
+        name="access_key"
+        value="2d93c215-c27d-4a5f-b238-fa4f8cf0f448"
+      />
+
+      <ul class="flex flex-col gap-1.5">
+        <div class="flex flex-col gap-1.5">
+          <h4>Name</h4>
+          <input type="text" name="name" required />
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <h4>Email Address</h4>
+          <input type="email" name="email" required />
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <h4>Message</h4>
+          <textarea name="message" required></textarea>
+        </div>
+      </ul>
+
+      <!-- Honeypot Spam Protection -->
+      <input
+        type="checkbox"
+        name="botcheck"
+        class="hidden"
+        style="display: none;"
+      />
+
+      <input type="hidden" name="redirect" value={`${SITE_URL}/thanks`} />
+
+      <button type="submit"><h3>Submit</h3></button>
+    </form>
+  </main>
+</Layout>
