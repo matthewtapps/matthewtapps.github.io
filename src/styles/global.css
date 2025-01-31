@@ -92,4 +92,14 @@
       @apply rounded border px-2 py-1 font-medium text-black border-zinc-800 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white;
     }
   }
+
+  thanks {
+    p {
+      @apply my-4 leading-relaxed;
+    }
+    h1 {
+      @apply my-4 text-xl font-medium dark:text-white;
+    }
+
+  }
 }

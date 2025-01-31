@@ -1,8 +1,17 @@
 ---
-
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<p>
-  <h1>Thanks for your submission!</h1>
-  <p>I'll get back to you shortly.</p>
-</p>
+<Layout
+  title={SITE_TITLE}
+  description={SITE_DESCRIPTION}
+  className="flex h-svh flex-col"
+>
+  <thanks>
+    <p>
+      <h1>Thanks for your submission!</h1>
+      <p>I'll get back to you shortly.</p>
+    </p>
+  </thanks>
+</Layout>
