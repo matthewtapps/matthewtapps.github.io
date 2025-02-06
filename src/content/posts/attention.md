@@ -30,9 +30,14 @@ If I could guess, I would say that most people reading this can empathise with t
 
 I would also hazard a guess to say that no one reading this would say they have experienced a flow state while scrolling on social media. If you're anything like me, you would probably empathise with my experience, which is effectively the opposite of flow: I am fully aware that I am mindlessly doom scrolling while doing so, and feel powerless to stop, all the while feeling almost as miserable as I can get.
 
-Humankind is, by design, cognitively lazy. We have big brains, and they take a lot of power to operate. Evolutionarily, it makes sense that whenever it is possible to rest and do nothing, we will choose to do that, regardless of how it makes us feel.
+Humankind is, by design, cognitively lazy. We have big brains, and they take a lot of power to operate. Evolutionarily, it makes sense that whenever it is possible to rest and do nothing, we will choose to do that, regardless of how it makes us feel in the long run.
 
 So when social media companies are [incentivized](/posts/social-media-and-incentives) to train their recommendation algorithms to maximise the amount of attention we spend on their platforms, it naturally follows that these algorithms evolve to hack our biology and provide easy access to dopamine to our primitive brains.
 
 ## Measuring Attention
-Csikszentmihalyi and the research he 
+Csikszentmihalyi states that a human is capable of processing 128 "bits" of information per second - 128 units of attention. Listening in a conversation takes 40 or so bits per second, with the remaining bits likely spent processing the information being listened to in greater detail, making connections, and figuring out what next to say.
+
+Based on this measure, we can extrapolate a great many things, for example:
+- If being productive at my job requires all 128 bits per second, you calculate how much my employer pays me per bit of attention.
+- This could also be used to calculate the profit I generate for my employer per bit of attention.
+- If I get distracted and look at social media while at work, based on the above measures, you could calculate the economic impact of the attention that has been robbed from me and my employer.
