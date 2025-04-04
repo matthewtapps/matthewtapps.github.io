@@ -164,8 +164,52 @@
 					<div class="row">
 						<div class="col-xs-3"><label>Melee Weapon Attack Skill: <input pattern="\d*" type="text" class="js-char-field-melee_weapon_attack_skill" name="melee_weapon_attack" /></label></div>
 						<div class="col-xs-3"><label>Ranged Weapon Attack Skill: <input pattern="\d*" type="text" class="js-char-field-ranged_weapon_attack_skill" name="ranged_weapon_attack" /></label></div>
-						<div class="col-xs-3"><label>Brawling Skill: <input pattern="\d*" type="text" class="js-char-field-brawling_skill" name="brawling" /></label></div>
+						<div class="col-xs-3"><label>Brawling<br />Skill: <input pattern="\d*" type="text" class="js-char-field-brawling_skill" name="brawling" /></label></div>
 					</div>
+
+					<div class="row">
+						<div class="col-xs-12"><h5>Weapon</h5></div>
+					</div>
+          <div class="row">
+            <div class="col-xs-2">
+              <label>
+                Ready:
+                <input type="checkbox" class="js-char-field-weapon-ready" name="weapon_ready" />
+              </label>
+            </div>
+
+            <div class="col-xs-2">
+              <label>
+                Time to Ready:
+                <input pattern="\d*" type="text" class="js-char-field-weapon-time-to-ready" name="weapon_time_to_ready" />
+              </label>
+            </div>
+
+            <div class="col-xs-3">
+              <label>
+                Time Between Shots:
+                <input pattern="\d*" type="text" class="js-char-field-weapon-time-between-shots" name="weapon_time_between_shots" />
+              </label>
+            </div>
+
+            <div class="col-xs-2">
+              <label>
+                Time to Reload:
+                <input pattern="\d*" type="text" class="js-char-field-weapon-time-to-reload" name="weapon_time_to_reload" />
+              </label>
+            </div>
+
+            <div class="col-xs-3">
+              <label>
+                Shots:
+                <span style="display: inline-flex; align-items: center; gap: 5px;">
+                  <input pattern="\d*" type="text" class="js-char-field-weapon-shots-current" name="weapon_shots_current" style="width: 40px;" />
+                  /
+                  <input pattern="\d*" type="text" class="js-char-field-weapon-shots-max" name="weapon_shots_max" style="width: 40px;" />
+                </span>
+              </label>
+            </div>
+          </div>
 
 					<div class="row">
 						<div class="col-xs-12"><h5>Hit Points</h5></div>
@@ -266,9 +310,9 @@
 						<th class="text-center">DR</th>
 						<th class="text-center">HP<br />Cur/Max</th>
 						<th class="text-center">Fatigue<br />Cur/Max</th>
-						<th class="text-center">M. Weapon<br />Attack<br />Skill</th>
-						<th class="text-center">R. Weapon<br />Attack<br />Skill</th>
-						<th class="text-center">Brawling<br />Skill</th>
+						<th class="text-center">MW/RW/B<br />Skill</th>
+						<th class="text-center">Weapon Ready?<br/>TTR/TTRb/TTRe</th>
+						<th class="text-center">Shots<br />Cur/Max</th>
 						<th class="text-center">Posture</th>
 						<th class="text-center">Maneuver</th>
 						<th class="text-center">Notes</th>

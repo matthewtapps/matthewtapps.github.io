@@ -1,7 +1,6 @@
 // class_character.js
 
 function class_character() {
-
   this.reset = reset;
   function reset() {
     debugConsole("reset() called");
@@ -31,6 +30,15 @@ function class_character() {
     this.brawling_skill = 10;
     this.ranged_weapon_attack_skill = 10;
 
+    this.weapon = {
+      ready: false,
+      time_to_ready: 1,
+      time_between_shots: 1,
+      time_to_reload: 2,
+      shots_current: 6,
+      shots_max: 6,
+    };
+
     this.defenses = {};
     this.defenses.dr = 0;
     this.defenses.dodge = 7;
@@ -43,7 +51,7 @@ function class_character() {
 
     this.posture = "Standing";
 
-    this.maneuver = "Do nothing"
+    this.maneuver = "Do nothing";
   }
 
   this.calc = calc;
@@ -81,7 +89,7 @@ function class_character() {
   this.get_attribute = get_attribute;
   function get_attribute(attr_name) {
     debugConsole("get_attribute('" + attr_name + "') called");
-    if (typeof (this.attributes[attr_name]) != "undefined")
+    if (typeof this.attributes[attr_name] != "undefined")
       return this.attributes[attr_name];
     return "(undefined)";
   }
@@ -89,25 +97,25 @@ function class_character() {
   this.get_defense = get_defense;
   function get_defense(defense_name) {
     debugConsole("get_defense('" + defense_name + "') called");
-    if (typeof (this.defenses[defense_name]) != "undefined")
+    if (typeof this.defenses[defense_name] != "undefined")
       return this.defenses[defense_name];
     return "(undefined)";
   }
 
-
-
   this.get_secondary = get_secondary;
   function get_secondary(attr_name) {
     debugConsole("get_secondary('" + attr_name + "') called");
-    if (typeof (this.secondary[attr_name]) != "undefined")
+    if (typeof this.secondary[attr_name] != "undefined")
       return this.secondary[attr_name];
     return "(undefined)";
   }
 
   this.set_attribute = set_attribute;
   function set_attribute(attr_name, new_value) {
-    debugConsole("set_attribute('" + attr_name + "', '" + new_value + "') called");
-    if (typeof (this.attributes[attr_name]) != "undefined") {
+    debugConsole(
+      "set_attribute('" + attr_name + "', '" + new_value + "') called",
+    );
+    if (typeof this.attributes[attr_name] != "undefined") {
       this.attributes[attr_name] = new_value;
       this.calc();
       return this.attributes[attr_name];
@@ -118,8 +126,10 @@ function class_character() {
 
   this.set_secondary = set_secondary;
   function set_secondary(attr_name, new_value) {
-    debugConsole("set_secondary('" + attr_name + "', '" + new_value + "') called");
-    if (typeof (this.secondary[attr_name]) != "undefined") {
+    debugConsole(
+      "set_secondary('" + attr_name + "', '" + new_value + "') called",
+    );
+    if (typeof this.secondary[attr_name] != "undefined") {
       this.secondary[attr_name] = new_value;
       this.calc();
       return this.secondary[attr_name];
@@ -130,8 +140,10 @@ function class_character() {
 
   this.set_defense = set_defense;
   function set_defense(defense_name, new_value) {
-    debugConsole("set_defense('" + defense_name + "', '" + new_value + "') called");
-    if (typeof (this.defenses[defense_name]) != "undefined") {
+    debugConsole(
+      "set_defense('" + defense_name + "', '" + new_value + "') called",
+    );
+    if (typeof this.defenses[defense_name] != "undefined") {
       this.defenses[defense_name] = new_value;
       this.calc();
       return this.defenses[defense_name];
@@ -198,5 +210,25 @@ function class_character() {
   this.get_maneuver = get_maneuver;
   function get_maneuver() {
     return this.maneuver;
+  }
+
+  this.set_weapon = set_weapon;
+  this.get_weapon = get_weapon;
+
+  function set_weapon(field_name, new_value) {
+    debugConsole(`set_weapon('${field_name}', '${new_value}') called`);
+    if (typeof this.weapon[field_name] !== "undefined") {
+      this.weapon[field_name] = new_value;
+      return this.weapon[field_name];
+    }
+    return false;
+  }
+
+  function get_weapon(field_name) {
+    debugConsole(`get_weapon('${field_name}') called`);
+    if (typeof this.weapon[field_name] !== "undefined") {
+      return this.weapon[field_name];
+    }
+    return "(undefined)";
   }
 }
