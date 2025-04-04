@@ -3,6 +3,70 @@ var gm_control_sheet = new Array();
 var gm_control_current_turn = 0;
 var gm_control_current_combatatant = 0;
 var gm_control_currently_editing = 0;
+// Define dropdown options for specific fields
+const DROPDOWN_OPTIONS = {
+  posture: {
+    Standing: true,
+    Crouching: true,
+    Kneeling: true,
+    Sitting: true,
+    Prone: true,
+    Crawling: true,
+  },
+  maneuver: {
+    "Melee Attack": {
+      "All-Out Attack": ["Determined", "Strong"],
+      "Move and Attack": ["Heroic Charge"],
+      "Deceptive Attack": [],
+    },
+    "Ranged Attack": {
+      "All-Out Attack": ["Determined"],
+      "Prediction Shot": [],
+    },
+    Aim: true, // Marking "Aim" as selectable
+    "Change Posture": true,
+    "All-Out Defense": true,
+    Ready: true,
+  },
+};
+
+function populateDropdown(field, currentValue) {
+  let select = $("<select>", {
+    class: "form-control js-single-select",
+  });
+
+  function addOptions(entries, depth = 0) {
+    Object.entries(entries).forEach(([key, value]) => {
+      let isParentSelectable = typeof value === "boolean" && value;
+      let isLeafNode = Array.isArray(value) || typeof value === "boolean";
+
+      if (!isLeafNode) {
+        // Parent category (non-selectable unless explicitly allowed)
+        let optgroup = $("<option>", {
+          disabled: !isParentSelectable,
+          value: isParentSelectable ? key : "",
+          text: key.toUpperCase(),
+          class: "dropdown-header",
+        });
+        select.append(optgroup);
+        addOptions(value, depth + 1);
+      } else {
+        // Child option with indentation
+        (Array.isArray(value) ? value : [key]).forEach((sub) => {
+          let selected = currentValue === sub ? "selected" : "";
+          let indent = "&nbsp;".repeat(depth * 4); // Indentation for tiered structure
+          select.append(
+            `<option value="${sub}" ${selected}>${indent}${sub}</option>`,
+          );
+        });
+      }
+    });
+  }
+
+  addOptions(DROPDOWN_OPTIONS[field]);
+  return select;
+}
+
 function gm_control_propogate_mooks() {
   debugConsole("gm_control_propogate_mooks() called");
   original_length = gm_control_sheet.length;
@@ -584,23 +648,25 @@ function gm_control_display_sheet() {
 
       html += "</td>";
 
-      html += '<div class="js-gm-control-posture-modify">';
       html +=
         '<td class="text-center js-editable js-posture-edit" data-field="posture" data-index="' +
         count +
-        '">' +
+        '">';
+      html +=
+        '<span class="js-posture-display">' +
         gm_control_sheet[count].get_posture() +
-        "</td>";
-      html += "</div>";
+        "</span>";
+      html += "</td>";
 
-      html += '<div class="js-gm-control-maneuver-modify">';
       html +=
         '<td class="text-center js-editable js-maneuver-edit" data-field="maneuver" data-index="' +
         count +
-        '">' +
+        '">';
+      html +=
+        '<span class="js-maneuver-display">' +
         gm_control_sheet[count].get_maneuver() +
-        "</td>";
-      html += "</div>";
+        "</span>";
+      html += "</td>";
 
       html += '<div class="js-gm-control-notes-modify">';
       html +=
@@ -794,8 +860,8 @@ function gm_control_init_entry_form(character) {
     $(".js-char-field-weapon-time-to-reload").val("1");
     $(".js-char-field-weapon-time-between-shots").val("1");
 
-    $(".js-char-field-weapon-max_shots").val("1");
-    $(".js-char-field-weapon-cur_shots").val("1");
+    $(".js-char-field-weapon-max_shots").val(6);
+    $(".js-char-field-weapon-cur_shots").val(6);
 
     $(".js-char-field-posture").val("Standing");
 
@@ -935,11 +1001,11 @@ function gm_control_assign_data_to_char(character) {
   );
   character.set_weapon(
     "shots_max",
-    $(".js-char-field-weapon-max_shots").val() / 1,
+    $(".js-char-field-weapon-shots-max").val() / 1,
   );
   character.set_weapon(
     "shots_current",
-    $(".js-char-field-weapon-cur_shots").val() / 1,
+    $(".js-char-field-weapon-shots-current").val() / 1,
   );
 
   character.set_defense("dr", $(".js-char-field-dr").val() / 1);
@@ -1761,65 +1827,84 @@ function gm_control_refresh_events() {
 
   $(".js-editable")
     .off("click")
-    .on("click", function () {
+    .on("click", function (event) {
       let $this = $(this);
       let index = $this.data("index");
       let field = $this.data("field");
 
-      // Determine value based on field prefix
-      let currentValue;
-      if (field.startsWith("weapon_")) {
-        const subfield = field.replace("weapon_", "");
-        currentValue = gm_control_sheet[index].get_weapon(subfield);
-      } else {
-        // Fallback for non-weapon fields if any still use old accessors
-        currentValue = gm_control_sheet[index][`get_${field}`]?.();
-      }
+      // If the field has a dropdown
+      if (DROPDOWN_OPTIONS[field]) {
+        event.stopPropagation();
+        if ($this.hasClass("active-select")) return;
+        $this.addClass("active-select");
 
-      // Create an input box with auto-selection
-      let input = $("<input>", {
-        type: "text",
-        class: "form-control",
-        value: currentValue,
-      }).css("width", "100%");
+        let currentValue = gm_control_sheet[index][`get_${field}`]?.() || "";
+        let select = populateDropdown(field, currentValue);
 
-      // Swap in the input field and auto-select the text
-      $this.html(input);
-      input.focus().select();
+        $this.html(select);
+        select.focus().click(); // Ensures dropdown opens immediately
 
-      function saveInput() {
-        let newValue = input.val().trim() / 1;
-
-        if (field.startsWith("weapon_")) {
-          const subfield = field.replace("weapon_", "");
-          gm_control_sheet[index].set_weapon(subfield, newValue);
-        } else {
+        function saveSelection() {
+          let newValue = select.val() || "";
           gm_control_sheet[index][`set_${field}`]?.(newValue);
+          $this.html(newValue || "-");
+          local_storage_save(
+            "gm_control_current_sheet",
+            gm_control_export_json(),
+            true,
+          );
+          $this.removeClass("active-select");
         }
 
-        $this.html(newValue || "-"); // Restore text or placeholder
-        local_storage_save(
-          "gm_control_current_sheet",
-          gm_control_export_json(),
-          true,
-        );
+        select.on("change", saveSelection);
+        select.on("blur", saveSelection);
+      } else {
+        // ✅ Restore Inline Text Editing for Non-Dropdown Fields
+        let currentValue = field.startsWith("weapon_")
+          ? gm_control_sheet[index].get_weapon(field.replace("weapon_", ""))
+          : gm_control_sheet[index][`get_${field}`]?.();
+
+        let input = $("<input>", {
+          type: "text",
+          class: "form-control",
+          value: currentValue,
+        }).css("width", "100%");
+
+        $this.html(input);
+        input.focus().select();
+
+        function saveInput() {
+          let newValue = input.val().trim();
+
+          if (field.startsWith("weapon_")) {
+            gm_control_sheet[index].set_weapon(
+              field.replace("weapon_", ""),
+              newValue,
+            );
+          } else {
+            gm_control_sheet[index][`set_${field}`]?.(newValue);
+          }
+
+          $this.html(newValue || "-");
+          local_storage_save(
+            "gm_control_current_sheet",
+            gm_control_export_json(),
+            true,
+          );
+        }
+
+        input.on("blur", saveInput);
+        input.on("keydown", function (e) {
+          if (e.key === "Enter") {
+            saveInput();
+            input.blur();
+          }
+        });
+
+        input.on("click", function (e) {
+          e.stopPropagation();
+        });
       }
-
-      // Save on blur
-      input.on("blur", saveInput);
-
-      // Save on Enter
-      input.on("keydown", function (e) {
-        if (e.key === "Enter") {
-          saveInput();
-          input.blur();
-        }
-      });
-
-      // Prevent event bubbling
-      input.on("click", function (e) {
-        e.stopPropagation();
-      });
     });
   $(".js-weapon-ready-toggle")
     .off("change")

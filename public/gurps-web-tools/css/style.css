@@ -63,9 +63,9 @@ select, input[type="text"], textarea {
   font-size: 12px;
   outline: none;
   resize: none;
-  background: #333;
-  color: #e0e0e0;
-  border: 1px solid #555;
+  background: #333 !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #555 !important;
 }
 
 select:focus, input[type="text"]:focus, textarea:focus {
