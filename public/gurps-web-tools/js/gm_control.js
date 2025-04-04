@@ -5,78 +5,132 @@ var gm_control_current_combatatant = 0;
 var gm_control_currently_editing = 0;
 // Define dropdown options for specific fields
 const DROPDOWN_OPTIONS = {
-  posture: {
-    Standing: true,
-    Crouching: true,
-    Kneeling: true,
-    Sitting: true,
-    Prone: true,
-    Crawling: true,
-  },
-  maneuver: {
-    "Melee Attack": {
-      "All-Out Attack": ["Determined", "Strong"],
-      "Move and Attack": ["Heroic Charge"],
-      "Deceptive Attack": [],
+  posture: [
+    { label: "Standing", value: "Standing" },
+    { label: "Crouching", value: "Crouching" },
+    { label: "Kneeling", value: "Kneeling" },
+    { label: "Sitting", value: "Sitting" },
+    { label: "Prone", value: "Prone" },
+    { label: "Crawling", value: "Crawling" },
+  ],
+  maneuver: [
+    {
+      group: "Other",
+      options: [
+        { label: "Aim", value: "Aim" },
+        { label: "Evaluate", value: "Evaluate" },
+        { label: "Change Posture", value: "Change Posture" },
+        { label: "Ready", value: "Ready" },
+        { label: "Move", value: "Move" },
+        { label: "Concentrate", value: "Concentrate" },
+        { label: "Wait", value: "Wait" },
+        { label: "Do Nothing", value: "Do Nothing" },
+      ],
     },
-    "Ranged Attack": {
-      "All-Out Attack": ["Determined"],
-      "Prediction Shot": [],
+    {
+      group: "Ranged Attack",
+      options: [
+        { label: "Standard", value: "Standard" },
+        { label: "Prediction Shot", value: "Prediction Shot" },
+        { label: "Dual-Weapon Attack", value: "Dual_Weapon Attack" },
+        {
+          label: "All-Out Attack",
+          options: [
+            { label: "Determined", value: "Determined" },
+            { label: "Supression Fire", value: "Supression Fire" },
+          ],
+        },
+        { label: "Move and Attack", value: "Move and Attack" },
+      ],
     },
-    Aim: true, // Marking "Aim" as selectable
-    "Change Posture": true,
-    "All-Out Defense": true,
-    Ready: true,
-  },
+    {
+      group: "Melee Attack",
+      options: [
+        { label: "Standard", value: "Standard" },
+        { label: "Deceptive Attack", value: "Deceptive Attack" },
+        { label: "Dual-Weapon Attack", value: "Dual-Weapon Attack" },
+        { label: "Rapid Strike", value: "Rapid Strike" },
+        { label: "Slam", value: "Slam" },
+        { label: "Telegraphic Attack", value: "Telegraphic Attack" },
+        { label: "Flurry of Blows", value: "Flurry of Blows" },
+        { label: "Mighty Blows", value: "Might Blows" },
+        { label: "Rapid Recovery", value: "Rapid Recovery" },
+        {
+          label: "All-Out Attack",
+          options: [
+            { label: "Determined", value: "Determined" },
+            { label: "Double", value: "Double" },
+            { label: "Strong", value: "Strong" },
+          ],
+        },
+        {
+          label: "Move and Attack",
+          options: [
+            { label: "Standard", value: "Standard" },
+            { label: "Heroic Charge", value: "Heroic Charge" },
+            { label: "Rapid Recovery", value: "Rapid Recovery" },
+            { label: "Slam", value: "Slam" },
+            { label: "Telegraphic Attack", value: "Telegraphic Attack" },
+          ],
+        },
+      ],
+    },
+    {
+      group: "All-Out Defense",
+      options: [
+        { label: "Standard", value: "Standard" },
+        { label: "Double", value: "Double Defense" },
+      ],
+    },
+  ],
 };
 
 function populateDropdown(field, currentValue) {
-  let select = $("<select>", {
+  const select = $("<select>", {
     class: "form-control js-single-select",
   });
 
-  function addOptions(entries, depth = 0) {
-    Object.entries(entries).forEach(([key, value]) => {
-      let isParentSelectable = typeof value === "boolean" && value;
-      let isLeafNode = Array.isArray(value) || typeof value === "boolean";
+  function renderOption(
+    { label, value, disabled = false },
+    indentLevel = 0,
+    path = [],
+  ) {
+    const indent = "&nbsp;".repeat(indentLevel * 4);
+    const fullValue = value ? [...path, value].join("::") : "";
+    const selected = fullValue === currentValue ? "selected" : "";
+    const isDisabled = disabled ? "disabled" : "";
+    return `<option value="${fullValue}" ${selected} ${isDisabled}>${indent}${label}</option>`;
+  }
 
-      if (!isLeafNode) {
-        // Parent category (non-selectable unless explicitly allowed)
-        let optgroup = $("<option>", {
-          disabled: !isParentSelectable,
-          value: isParentSelectable ? key : "",
-          text: key.toUpperCase(),
-          class: "dropdown-header",
+  function renderGroup(label, options) {
+    const optgroup = $("<optgroup>").attr("label", label);
+
+    options.forEach((opt) => {
+      if (opt.options) {
+        // Render second-tier label as a disabled option (like a subheader)
+        optgroup.append(renderOption({ label: opt.label, disabled: true }, 1));
+        opt.options.forEach((nestedOpt) => {
+          optgroup.append(renderOption(nestedOpt, 2, [label, opt.label]));
         });
-        select.append(optgroup);
-        addOptions(value, depth + 1);
       } else {
-        // Child option with indentation
-        (Array.isArray(value) ? value : [key]).forEach((sub) => {
-          let selected = currentValue === sub ? "selected" : "";
-          let indent = "&nbsp;".repeat(depth * 4); // Indentation for tiered structure
-          select.append(
-            `<option value="${sub}" ${selected}>${indent}${sub}</option>`,
-          );
-        });
+        optgroup.append(renderOption(opt, 1, [label]));
       }
     });
+
+    return optgroup;
   }
 
-  addOptions(DROPDOWN_OPTIONS[field]);
+  const items = DROPDOWN_OPTIONS[field];
+
+  items.forEach((item) => {
+    if (item.group) {
+      select.append(renderGroup(item.group, item.options));
+    } else {
+      select.append(renderOption(item));
+    }
+  });
+
   return select;
-}
-
-function gm_control_propogate_mooks() {
-  debugConsole("gm_control_propogate_mooks() called");
-  original_length = gm_control_sheet.length;
-  for (count = 0; count < 5; count++) {
-    gm_control_sheet.push(new class_character());
-    gm_control_sheet[count + original_length].set_name(
-      "Long Name Mook #" + (count + 1),
-    );
-  }
-  gm_control_display_sheet();
 }
 
 var gm_control_sheet_currently_selected = Array();
@@ -1847,7 +1901,13 @@ function gm_control_refresh_events() {
         function saveSelection() {
           let newValue = select.val() || "";
           gm_control_sheet[index][`set_${field}`]?.(newValue);
-          $this.html(newValue || "-");
+          const formattedValue = newValue
+            ? newValue
+                .split("::")
+                .map((part) => `<span>${part}</span>`)
+                .join("<br>")
+            : "-";
+          $this.html(formattedValue);
           local_storage_save(
             "gm_control_current_sheet",
             gm_control_export_json(),
@@ -1913,6 +1973,11 @@ function gm_control_refresh_events() {
       const isChecked = $(this).is(":checked");
 
       gm_control_sheet[index].set_weapon("ready", isChecked);
+      local_storage_save(
+        "gm_control_current_sheet",
+        gm_control_export_json(),
+        true,
+      );
     });
 }
 

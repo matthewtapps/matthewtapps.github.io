@@ -209,7 +209,8 @@ function class_character() {
 
   this.get_maneuver = get_maneuver;
   function get_maneuver() {
-    return this.maneuver;
+    const parts = this.maneuver.split("::") || [];
+    return parts.length ? parts.join("<br>") : "-";
   }
 
   this.set_weapon = set_weapon;

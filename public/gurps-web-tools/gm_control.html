@@ -232,27 +232,12 @@
 					<div class="row">
 						<div class="col-xs-12"><h5>Other</h5></div>
 					</div>
-          <div class="row">
-            <div class="col-xs-3">
-              <label>Posture:
-                <select class="js-char-field-posture form-control" name="posture">
-                  <!-- Options will be inserted dynamically -->
-                </select>
-              </label>
-            </div>
-            <div class="col-xs-3">
-              <label>Maneuver:
-                <select class="js-char-field-maneuver form-control" name="maneuver">
-                  <!-- Options will be inserted dynamically -->
-                </select>
-              </label>
-            </div>
-            <div class="col-xs-3">
-              <label>Notes:
-                <input type="text" class="js-char-field-notes form-control" name="notes" />
-              </label>
-            </div>
-          </div>
+					<div class="row">
+						<div class="col-xs-3"><label>Reaction: <input type="text" class="js-char-field-reaction" name="reaction" /></label></div>
+						<div class="col-xs-3"><label>Posture: <input type="text" class="js-char-field-posture" name="posture" /></label></div>
+						<div class="col-xs-3"><label>Maneuver: <input type="text" class="js-char-field-maneuver" name="maneuver" /></label></div>
+						<div class="col-xs-3"><label>Notes: <input type="text" class="js-char-field-notes" name="notes" /></label></div>
+					</div>
 
 					<div class="js-area-add-more">
 						<div class="row">
@@ -326,7 +311,7 @@
 						<th class="text-center">HP<br />Cur/Max</th>
 						<th class="text-center">Fatigue<br />Cur/Max</th>
 						<th class="text-center">MW/RW/B<br />Skill</th>
-						<th class="text-center">Weapon Ready?<br/>TTR/TTRb/TTRe</th>
+						<th class="text-center">Weapon Ready?<br/>TTR/TBtw/TTRe</th>
 						<th class="text-center">Shots<br />Cur/Max</th>
 						<th class="text-center">Posture</th>
 						<th class="text-center">Maneuver</th>
@@ -359,10 +344,13 @@
 <script src="./js/dice.js"></script>
 <script src="./js/gm_control.js"></script>
 <script>
-  // Populate the dropdowns on page load
-  $(document).ready(function () {
-    populateDropdown(".js-char-field-posture", DROPDOWN_OPTIONS.posture);
-    populateDropdown(".js-char-field-maneuver", DROPDOWN_OPTIONS.maneuver);
-  });
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-41054868-6', 'jdgwf.github.io');
+  ga('send', 'pageview');
+
 </script>
 </html>
