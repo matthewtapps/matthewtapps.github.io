@@ -1,0 +1,35 @@
+CACHE MANIFEST
+# rev 2014070201
+# On July 2nd, 2014 Rev TWO!
+./dice.html
+./index.html
+./gm_control.html
+./chargen.html
+
+./css/bootstrap.min.css
+./css/style.css
+
+./fonts/glyphicons-halflings-regular.eot
+./fonts/glyphicons-halflings-regular.svg
+./fonts/glyphicons-halflings-regular.ttf
+./fonts/glyphicons-halflings-regular.woff
+
+./img/gurps_web_tools_50x50.png
+./img/gurps_web_tools_256x256.png
+
+./js/background.js
+./js/bootstrap.min.js
+./js/dice.js
+./js/functions.js
+./js/jquery-1.10.2.min.js
+./js/jquery.sortable.js
+./js/jquery.touch-punch.min.js
+./js/localstorage.js
+./js/localstorage.js
+./js/gm_control.js
+./js/class_character.js
+
+FALLBACK:
+
+NETWORK:
+*

@@ -1,0 +1,219 @@
+body {
+  background: #121212;
+  color: #e0e0e0;
+}
+
+legend {
+  color: #e0e0e0;
+}
+
+a {
+  color: #66bb6a;
+}
+
+a:hover {
+  color: #4caf50;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+.js-info-stats {
+  padding: 10px;
+  background: #222;
+}
+
+table {
+  width: 100%;
+  border-top: 1px solid #444;
+  border-left: 1px solid #444;
+  font-size: 14px;
+  border-collapse: separate;
+  background: #1e1e1e;
+}
+
+table th, table td {
+  border-right: 1px solid #444;
+  border-bottom: 1px solid #444;
+  padding: 2px 5px;
+  white-space: nowrap;
+  vertical-align: top;
+  font-size: 14px;
+}
+
+table th {
+  background: #333;
+  color: #fff;
+  vertical-align: bottom;
+}
+
+table .current-combatatant td {
+  background: #2e7d32 !important;
+}
+
+label {
+  display: block;
+}
+
+select, input[type="text"], textarea {
+  padding: 1px 5px;
+  display: block;
+  width: 100%;
+  font-size: 12px;
+  outline: none;
+  resize: none;
+  background: #333;
+  color: #e0e0e0;
+  border: 1px solid #555;
+}
+
+select:focus, input[type="text"]:focus, textarea:focus {
+  border: 1px solid #66bb6a;
+  background: #2c3e50;
+}
+
+.modal-dialog {
+  backdrop-filter: blur(10px);
+}
+
+.modal-content {
+  background: #222;
+  color: #e0e0e0;
+  border: 1px solid #555;
+  border-radius: 5px;
+}
+
+.modal-header {
+  background: #333;
+  color: #fff;
+  border-bottom: 1px solid #555;
+}
+
+.modal-body {
+  background: #222;
+}
+
+.modal-footer {
+  background: #333;
+  border-top: 1px solid #555;
+}
+
+.footer {
+  border-top: 2px solid #666;
+  padding: 10px 0;
+  margin: 30px 0 0 0;
+  font-size: 10px;
+}
+
+.header-bar {
+  background: #222;
+  color: #fff;
+}
+
+.action-bar {
+  background: #444;
+  color: #fff;
+  padding: 5px 0;
+}
+
+.action-bar a:hover, .header-bar a:hover {
+  color: #66bb6a;
+}
+
+.table-striped tbody tr:nth-child(odd) td, 
+.table-striped tbody tr:nth-child(odd) th {
+  background-color: #252525;
+}
+
+.table-bordered {
+  border: 1px solid #555;
+  border-collapse: separate;
+}
+
+.sorted_table .placeholder {
+  background: #66bb6a;
+}
+
+.js-mobile-details {
+  background: #222;
+  border: 1px solid #444;
+}
+
+.js-turn-controls {
+  margin-bottom: 20px;
+}
+
+.js-turn-controls a .glyphicon,
+.js-turn-controls .glyphicon {
+	font-size: 24px;
+	margin: 10px 10px;
+	padding: 0;
+}
+
+.js-turn-controls a {
+	margin: 0;
+	padding: 0;
+}
+
+.shock-damage {
+	font-weight: bold;
+	color: #fff;
+	background-color: #f00;
+	margin-right: 5px;
+	border: 1px solid #f00;
+	border-radius: 5px;
+	width: 10px;
+	height: 10px;
+	padding: 1px 2px;
+  border-bottom: 1px solid #444;
+}
+
+.color-red {
+  color: #e57373;
+}
+
+.js-gm-control-damage-modify-dropdown {
+	display: none;
+	overflow: hidden;
+}
+
+.js-gm-control-fatigue-modify-dropdown {
+	display: none;
+	overflow: hidden;
+}
+
+.js-gm-control-load-saved-items .glyphicon {
+	font-size: 20px;
+}
+
+.color-green {
+  color: #81c784;
+}
+
+
+.color-blue {
+  color: #64b5f6;
+}
+
+.js-gm-control-fatigue-modify-ok span,
+.js-gm-control-damage-modify-ok span,
+.js-gm-control-fatigue-modify-plus span,
+.js-gm-control-fatigue-modify-minus span,
+.js-gm-control-damage-modify-plus span,
+.js-gm-control-damage-modify-minus span {
+	font-size: 20px;
+}
+
+.js-gm-control-fatigue-modify-max,
+.js-gm-control-fatigue-modify-zero,
+.js-gm-control-damage-modify-max,
+.js-gm-control-damage-modify-zero,
+.js-gm-control-fatigue-modify-ok,
+.js-gm-control-damage-modify-ok {
+	display: none;
+}
+
+.action-bar {
+  margin-bottom: 10px;
+}
