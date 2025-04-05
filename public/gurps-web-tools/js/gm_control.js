@@ -30,9 +30,9 @@ const DROPDOWN_OPTIONS = {
     {
       group: "Ranged Attack",
       options: [
-        { label: "Standard", value: "Standard" },
+        { label: "Standard", value: " " },
         { label: "Prediction Shot", value: "Prediction Shot" },
-        { label: "Dual-Weapon Attack", value: "Dual_Weapon Attack" },
+        { label: "Dual-Weapon Attack", value: "Dual-Weapon Attack" },
         {
           label: "All-Out Attack",
           options: [
@@ -46,7 +46,7 @@ const DROPDOWN_OPTIONS = {
     {
       group: "Melee Attack",
       options: [
-        { label: "Standard", value: "Standard" },
+        { label: "Standard", value: " " },
         { label: "Deceptive Attack", value: "Deceptive Attack" },
         { label: "Dual-Weapon Attack", value: "Dual-Weapon Attack" },
         { label: "Rapid Strike", value: "Rapid Strike" },
@@ -66,7 +66,7 @@ const DROPDOWN_OPTIONS = {
         {
           label: "Move and Attack",
           options: [
-            { label: "Standard", value: "Standard" },
+            { label: "Standard", value: " " },
             { label: "Heroic Charge", value: "Heroic Charge" },
             { label: "Rapid Recovery", value: "Rapid Recovery" },
             { label: "Slam", value: "Slam" },
@@ -78,7 +78,7 @@ const DROPDOWN_OPTIONS = {
     {
       group: "All-Out Defense",
       options: [
-        { label: "Standard", value: "Standard" },
+        { label: "Standard", value: " " },
         { label: "Double", value: "Double Defense" },
       ],
     },
