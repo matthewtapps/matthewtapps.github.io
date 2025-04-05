@@ -914,12 +914,12 @@ function gm_control_init_entry_form(character) {
     $(".js-char-field-weapon-time-to-reload").val("1");
     $(".js-char-field-weapon-time-between-shots").val("1");
 
-    $(".js-char-field-weapon-max_shots").val(6);
-    $(".js-char-field-weapon-cur_shots").val(6);
+    $(".js-char-field-weapon-shots-max").val("6");
+    $(".js-char-field-weapon-shots-current").val("6");
 
     $(".js-char-field-posture").val("Standing");
 
-    $(".js-char-field-maneuver").val("Do nothing");
+    $(".js-char-field-maneuver").val("Other::Do Nothing");
 
     $(".js-char-field-notes").val("");
 
