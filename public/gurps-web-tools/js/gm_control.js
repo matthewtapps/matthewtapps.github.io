@@ -86,8 +86,20 @@ const DROPDOWN_OPTIONS = {
 };
 
 function populateDropdown(field, currentValue) {
-  const select = $("<select>", {
+  // Create a custom multi-column dropdown container instead of a select
+  const container = $("<div>", {
+    class: "custom-multi-column-dropdown",
+  });
+
+  // Add a hidden select for maintaining the actual value
+  const hiddenSelect = $("<select>", {
     class: "form-control js-single-select",
+    style: "display: none;",
+  });
+
+  // Create columns container
+  const columnsContainer = $("<div>", {
+    class: "dropdown-columns-container",
   });
 
   function renderOption(
@@ -95,42 +107,86 @@ function populateDropdown(field, currentValue) {
     indentLevel = 0,
     path = [],
   ) {
-    const indent = "&nbsp;".repeat(indentLevel * 4);
+    const indent =
+      indentLevel > 0
+        ? `<span class="option-indent level-${indentLevel}"></span>`
+        : "";
     const fullValue = value ? [...path, value].join("::") : "";
-    const selected = fullValue === currentValue ? "selected" : "";
+    const isSelected = fullValue === currentValue ? "selected" : "";
     const isDisabled = disabled ? "disabled" : "";
-    return `<option value="${fullValue}" ${selected} ${isDisabled}>${indent}${label}</option>`;
+
+    // Add to hidden select
+    hiddenSelect.append(
+      `<option value="${fullValue}" ${isSelected} ${isDisabled}>${label}</option>`,
+    );
+
+    // Only return visible element if not disabled (headers are handled separately)
+    if (!disabled) {
+      return `<div class="dropdown-option ${isSelected}" data-value="${fullValue}">${indent}${label}</div>`;
+    }
+    return "";
   }
 
   function renderGroup(label, options) {
-    const optgroup = $("<optgroup>").attr("label", label);
+    let html = `<div class="dropdown-group">`;
+    html += `<div class="dropdown-group-header">${label}</div>`;
 
     options.forEach((opt) => {
       if (opt.options) {
-        // Render second-tier label as a disabled option (like a subheader)
-        optgroup.append(renderOption({ label: opt.label, disabled: true }, 1));
+        // Render second-tier label as a subheader
+        html += `<div class="dropdown-subheader">${opt.label}</div>`;
         opt.options.forEach((nestedOpt) => {
-          optgroup.append(renderOption(nestedOpt, 2, [label, opt.label]));
+          html += renderOption(nestedOpt, 2, [label, opt.label]);
         });
       } else {
-        optgroup.append(renderOption(opt, 1, [label]));
+        html += renderOption(opt, 1, [label]);
       }
     });
 
-    return optgroup;
+    html += `</div>`;
+    return html;
   }
 
   const items = DROPDOWN_OPTIONS[field];
+  let columnsHTML = "";
 
   items.forEach((item) => {
     if (item.group) {
-      select.append(renderGroup(item.group, item.options));
+      columnsHTML += renderGroup(item.group, item.options);
     } else {
-      select.append(renderOption(item));
+      columnsHTML += renderOption(item);
     }
   });
 
-  return select;
+  columnsContainer.html(columnsHTML);
+  container.append(hiddenSelect);
+  container.append(columnsContainer);
+
+  // Handle option selection
+  container.on("click", ".dropdown-option", function (e) {
+    e.stopPropagation();
+    const newValue = $(this).data("value");
+    hiddenSelect.val(newValue);
+    container.trigger("change");
+
+    // Update selected status visually
+    container.find(".dropdown-option").removeClass("selected");
+    $(this).addClass("selected");
+  });
+
+  // Preserve the original select behaviors
+  container.val = function () {
+    return hiddenSelect.val();
+  };
+
+  container.on = function (event, handler) {
+    if (typeof handler === "function") {
+      hiddenSelect.on(event, handler);
+    }
+    return container;
+  };
+
+  return container;
 }
 
 var gm_control_sheet_currently_selected = Array();
@@ -1890,52 +1946,118 @@ function gm_control_refresh_events() {
       if (DROPDOWN_OPTIONS[field]) {
         event.stopPropagation();
         if ($this.hasClass("active-select")) return;
+
+        // Add active class
         $this.addClass("active-select");
-
         let currentValue = gm_control_sheet[index][`get_${field}`]?.() || "";
-        let select = populateDropdown(field, currentValue);
 
-        $this.html(select);
-        select.focus().click(); // Ensures dropdown opens immediately
+        // Create our custom multi-column dropdown
+        let dropdown = populateDropdown(field, currentValue);
 
-        function saveSelection() {
-          let newValue = select.val() || "";
-          gm_control_sheet[index][`set_${field}`]?.(newValue);
-          const formattedValue = newValue
-            ? newValue
-                .split("::")
-                .map((part) => `<span>${part}</span>`)
-                .join("<br>")
-            : "-";
-          $this.html(formattedValue);
-          local_storage_save(
-            "gm_control_current_sheet",
-            gm_control_export_json(),
-            true,
-          );
+        // First add to body with invisible styling to calculate its dimensions
+        dropdown.css({
+          position: "absolute",
+          visibility: "hidden",
+          display: "block",
+        });
+        $("body").append(dropdown);
+
+        // Get position and dimensions
+        const cellPosition = $this.offset();
+        const cellHeight = $this.outerHeight();
+        const dropdownWidth = dropdown.outerWidth();
+        const windowWidth = $(window).width();
+
+        // Calculate the best position to avoid overflow
+        let leftPosition = cellPosition.left;
+
+        // Check if dropdown would overflow right edge of window
+        if (leftPosition + dropdownWidth > windowWidth) {
+          // Adjust to align with right edge (with a small margin)
+          leftPosition = Math.max(10, windowWidth - dropdownWidth - 10);
+        }
+
+        // Set the final position and make visible
+        dropdown.css({
+          position: "absolute",
+          top: cellPosition.top + cellHeight + "px",
+          left: leftPosition + "px",
+          zIndex: 1050,
+          visibility: "visible",
+        });
+
+        // Track if a selection was made
+        let selectionMade = false;
+        let selectedValue = currentValue;
+
+        // Handle option selection
+        dropdown.find(".dropdown-option").on("click", function (e) {
+          e.stopPropagation();
+          selectedValue = $(this).data("value");
+          selectionMade = true;
+
+          // Update visual selection
+          dropdown.find(".dropdown-option").removeClass("selected");
+          $(this).addClass("selected");
+        });
+
+        // Handle save and close
+        function handleClose() {
+          if (selectionMade) {
+            gm_control_sheet[index][`set_${field}`]?.(selectedValue);
+
+            const formattedValue = selectedValue
+              ? selectedValue
+                  .split("::")
+                  .map((part) => `<span>${part}</span>`)
+                  .join("<br>")
+              : "-";
+
+            $this.html(
+              `<span class="js-maneuver-display">${formattedValue}</span>`,
+            );
+
+            local_storage_save(
+              "gm_control_current_sheet",
+              gm_control_export_json(),
+              true,
+            );
+          }
+
+          // Remove the dropdown and active class
+          dropdown.remove();
           $this.removeClass("active-select");
         }
 
-        select.on("change", saveSelection);
-        select.on("blur", saveSelection);
+        // Add double-click handler to immediately select and close
+        dropdown.find(".dropdown-option").on("dblclick", function (e) {
+          e.stopPropagation();
+          selectedValue = $(this).data("value");
+          selectionMade = true;
+          handleClose();
+        });
+
+        // Close dropdown when clicking outside
+        $(document).one("click", function (e) {
+          // Make sure the click is outside our dropdown
+          if (!$(e.target).closest(".custom-multi-column-dropdown").length) {
+            handleClose();
+          }
+        });
       } else {
         // ✅ Restore Inline Text Editing for Non-Dropdown Fields
         let currentValue = field.startsWith("weapon_")
           ? gm_control_sheet[index].get_weapon(field.replace("weapon_", ""))
           : gm_control_sheet[index][`get_${field}`]?.();
-
         let input = $("<input>", {
           type: "text",
           class: "form-control",
           value: currentValue,
         }).css("width", "100%");
-
         $this.html(input);
         input.focus().select();
-
         function saveInput() {
           let newValue = input.val().trim();
-
           if (field.startsWith("weapon_")) {
             gm_control_sheet[index].set_weapon(
               field.replace("weapon_", ""),
@@ -1944,7 +2066,6 @@ function gm_control_refresh_events() {
           } else {
             gm_control_sheet[index][`set_${field}`]?.(newValue);
           }
-
           $this.html(newValue || "-");
           local_storage_save(
             "gm_control_current_sheet",
@@ -1952,7 +2073,6 @@ function gm_control_refresh_events() {
             true,
           );
         }
-
         input.on("blur", saveInput);
         input.on("keydown", function (e) {
           if (e.key === "Enter") {
@@ -1960,7 +2080,6 @@ function gm_control_refresh_events() {
             input.blur();
           }
         });
-
         input.on("click", function (e) {
           e.stopPropagation();
         });
