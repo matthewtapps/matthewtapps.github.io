@@ -961,6 +961,7 @@ function gm_control_init_entry_form(character) {
     $(".js-char-field-posture").val(character.get_posture());
     $(".js-char-field-maneuver").val(character.get_maneuver());
     $(".js-char-field-notes").val(character.get_notes());
+    $(".js-char-field-colour").val(character.get_colour());
   } else {
     $(".js-char-field-name").val("");
     $(".js-char-field-player").val("");
@@ -997,6 +998,7 @@ function gm_control_init_entry_form(character) {
     $(".js-char-field-maneuver").val("Other::Do Nothing");
 
     $(".js-char-field-notes").val("");
+    $(".js-char-field-colour").val("");
 
     $(".js-char-field-reaction").val("0");
 
