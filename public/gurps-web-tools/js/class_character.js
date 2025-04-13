@@ -52,6 +52,8 @@ function class_character() {
     this.posture = "Standing";
 
     this.maneuver = "Do nothing";
+
+    this.colour = "";
   }
 
   this.calc = calc;
@@ -231,5 +233,16 @@ function class_character() {
       return this.weapon[field_name];
     }
     return "(undefined)";
+  }
+
+  this.set_colour = set_colour;
+  this.get_colour = get_colour;
+
+  function set_colour(new_value) {
+    this.colour = new_value;
+  }
+
+  function get_colour() {
+    return this.colour;
   }
 }

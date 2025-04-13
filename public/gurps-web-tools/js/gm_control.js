@@ -349,6 +349,8 @@ function gm_control_export_json(selected_only) {
       posture: gm_control_sheet[count].get_posture(),
       maneuver: gm_control_sheet[count].get_maneuver(),
       notes: gm_control_sheet[count].get_notes(),
+
+      colour: gm_control_sheet[count].get_colour(),
     };
 
     if (selected_only) {
@@ -506,6 +508,10 @@ function gm_control_import_object(importing_object) {
       return_value.set_defense("dr", importing_object.defenses.dr / 1);
   }
 
+  if (typeof importing_object.colour != "undefined") {
+    return_value.set_colour(importing_object.colour);
+  }
+
   return return_value;
 }
 
@@ -527,7 +533,16 @@ function gm_control_display_sheet() {
       )
         current_combatatant = " current-combatatant";
       html +=
-        '<tr class="dragrow' + current_combatatant + '" ref="' + count + '">';
+        '<tr class="dragrow' + current_combatatant + '" ref="' + count + '"';
+
+      // Add custom background color if available
+      const rowColor = gm_control_sheet[count].get_colour?.() || "";
+      if (rowColor) {
+        html += ' style="background-color: ' + rowColor + ' !important;"';
+      }
+
+      html += ">";
+
       checked = "";
       if ($.inArray(count, gm_control_sheet_currently_selected) > -1) {
         checked = 'checked="checked" ';
@@ -796,6 +811,10 @@ function gm_control_display_sheet() {
         ' <a href="#" ref="' +
         count +
         '" title="Duplicate This Entry" class="js-gm-control-line-duplicate"><span class="glyphicon glyphicon-share"></span></a> ';
+      html +=
+        ' <a href="#" ref="' +
+        count +
+        '" title="Change Row Color" class="js-gm-control-line-color"><span class="glyphicon glyphicon-tint"></span></a> '; // Add color picker icon
       html +=
         ' <a href="#" ref="' +
         count +
@@ -1126,6 +1145,8 @@ function gm_control_assign_data_to_char(character) {
   character.set_notes($(".js-char-field-notes").val());
   character.set_maneuver($(".js-char-field-maneuver").val());
   character.set_posture($(".js-char-field-posture").val());
+
+  character.set_colour($(".js-char-field-colour").val());
 
   return character;
 }
@@ -1970,6 +1991,11 @@ function gm_control_refresh_events() {
 
         // Calculate the best position to avoid overflow
         let leftPosition = cellPosition.left;
+        let topPosition = cellPosition.top + cellHeight;
+
+        // Get window and dropdown dimensions
+        const windowHeight = $(window).height();
+        const dropdownHeight = dropdown.outerHeight();
 
         // Check if dropdown would overflow right edge of window
         if (leftPosition + dropdownWidth > windowWidth) {
@@ -1977,10 +2003,28 @@ function gm_control_refresh_events() {
           leftPosition = Math.max(10, windowWidth - dropdownWidth - 10);
         }
 
+        // Check if dropdown would overflow bottom of window
+        if (topPosition + dropdownHeight > windowHeight) {
+          // Position dropdown above the cell instead of below it
+          topPosition = Math.max(10, cellPosition.top - dropdownHeight);
+
+          // If it still doesn't fit above, then position at bottom with room to scroll
+          if (topPosition < 0) {
+            // Position it with some margin from the top
+            topPosition = 10;
+
+            // Adjust the height to fit within the viewport
+            const maxHeight = windowHeight - topPosition - 10; // 10px bottom margin
+            dropdown
+              .find(".dropdown-columns-container")
+              .css("max-height", maxHeight + "px");
+          }
+        }
+
         // Set the final position and make visible
         dropdown.css({
           position: "absolute",
-          top: cellPosition.top + cellHeight + "px",
+          top: topPosition + "px",
           left: leftPosition + "px",
           zIndex: 1050,
           visibility: "visible",
@@ -2181,4 +2225,123 @@ $(document).ready(function () {
   }
 
   gm_control_display_sheet();
+
+  $(document).on("click", ".js-gm-control-line-color", function (e) {
+    e.preventDefault();
+    const index = parseInt($(this).attr("ref"));
+    const currentColor = gm_control_sheet[index].get_colour?.() || "#333333";
+
+    // Create color picker container
+    const colorPickerContainer = $("<div>", {
+      class: "color-picker-container",
+      css: {
+        position: "fixed",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        background: "#222",
+        padding: "20px",
+        border: "1px solid #555",
+        borderRadius: "5px",
+        zIndex: 2000,
+        boxShadow: "0 0 10px rgba(0,0,0,0.5)",
+      },
+    });
+
+    // Add title
+    colorPickerContainer.append(
+      $("<h4>").text("Choose Row Color").css({
+        marginTop: 0,
+        marginBottom: "15px",
+        color: "#e0e0e0",
+      }),
+    );
+
+    // Add color input
+    const colorInput = $("<input>", {
+      type: "color",
+      value: currentColor,
+      css: {
+        width: "100%",
+        height: "40px",
+        background: "#333",
+        border: "1px solid #555",
+        marginBottom: "15px",
+      },
+    });
+    colorPickerContainer.append(colorInput);
+
+    // Add buttons container
+    const buttonsContainer = $("<div>").css({
+      display: "flex",
+      justifyContent: "space-between",
+    });
+
+    // Add clear button
+    const clearButton = $("<button>", {
+      class: "btn btn-default",
+      text: "Clear Color",
+      css: {
+        marginRight: "10px",
+      },
+    }).on("click", function () {
+      gm_control_sheet[index].set_colour("");
+      local_storage_save(
+        "gm_control_current_sheet",
+        gm_control_export_json(),
+        true,
+      );
+      colorPickerContainer.remove();
+      gm_control_display_sheet();
+    });
+    buttonsContainer.append(clearButton);
+
+    // Add button container
+    const confirmButtonContainer = $("<div>");
+
+    // Add cancel button
+    const cancelButton = $("<button>", {
+      class: "btn btn-default",
+      text: "Cancel",
+      css: {
+        marginRight: "10px",
+      },
+    }).on("click", function () {
+      colorPickerContainer.remove();
+    });
+    confirmButtonContainer.append(cancelButton);
+
+    // Add apply button
+    const applyButton = $("<button>", {
+      class: "btn btn-primary",
+      text: "Apply",
+    }).on("click", function () {
+      const selectedColor = colorInput.val();
+      gm_control_sheet[index].set_colour(selectedColor);
+      local_storage_save(
+        "gm_control_current_sheet",
+        gm_control_export_json(),
+        true,
+      );
+      colorPickerContainer.remove();
+      gm_control_display_sheet();
+    });
+    confirmButtonContainer.append(applyButton);
+
+    buttonsContainer.append(confirmButtonContainer);
+    colorPickerContainer.append(buttonsContainer);
+
+    // Add to body
+    $("body").append(colorPickerContainer);
+
+    // Close when clicking outside
+    $(document).one("click", function (e) {
+      if (
+        !$(e.target).closest(".color-picker-container").length &&
+        !$(e.target).closest(".js-gm-control-line-color").length
+      ) {
+        colorPickerContainer.remove();
+      }
+    });
+  });
 });

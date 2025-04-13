@@ -49,7 +49,7 @@ table th {
 }
 
 table .current-combatatant td {
-  background: #2e7d32 !important;
+  border: 1px solid #2e7d32 !important;
 }
 
 label {
@@ -121,8 +121,8 @@ select:focus, input[type="text"]:focus, textarea:focus {
   color: #66bb6a;
 }
 
-.table-striped tbody tr:nth-child(odd) td, 
-.table-striped tbody tr:nth-child(odd) th {
+.table-striped tbody tr:not([style*="background-color"]):nth-child(odd) td, 
+.table-striped tbody tr:not([style*="background-color"]):nth-child(odd) th {
   background-color: #252525;
 }
 
@@ -315,3 +315,23 @@ select:focus, input[type="text"]:focus, textarea:focus {
   background-color: #666;
 }
 
+/* Color picker styles */
+input[type="color"] {
+  -webkit-appearance: none;
+  border: none;
+  width: 100%;
+  height: 40px;
+  cursor: pointer;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 3px;
+}
+
+/* Make sure our colors override striping */
+tr[style*="background-color"] td {
+  background-color: inherit !important;
+}
